@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Meal Monkey - Complete Food Delivery Ecosystem with Flutter & Node.js">
+    <meta name="author" content="Yash Nandwani">
+    <title>Meal Monkey - Food Delivery Ecosystem</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container nav-container">
+            <div class="logo">
+                <i class="fas fa-utensils"></i>
+                <span>Meal Monkey</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#apps">Apps</a></li>
+                <li><a href="#tech">Tech Stack</a></li>
+                <li><a href="#screenshots">Screenshots</a></li>
+            </ul>
+            <a href="https://github.com/yashnandwanii/Meal-Monkey" target="_blank" class="btn-github">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text" data-aos="fade-right">
+                    <h1 class="hero-title">
+                        Complete Food Delivery
+                        <span class="gradient-text">Ecosystem</span>
+                    </h1>
+                    <p class="hero-subtitle">
+                        A full-stack food delivery platform built with Flutter & Node.js featuring customer app, delivery partner app, and restaurant management system.
+                    </p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <div>
+                                <h3>3</h3>
+                                <p>Mobile Apps</p>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-code"></i>
+                            <div>
+                                <h3>Full Stack</h3>
+                                <p>Flutter + Node.js</p>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-database"></i>
+                            <div>
+                                <h3>MongoDB</h3>
+                                <p>Database</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hero-buttons">
+                        <a href="https://github.com/yashnandwanii/Meal-Monkey" target="_blank" class="btn btn-primary">
+                            <i class="fab fa-github"></i> Explore Code
+                        </a>
+                        <a href="#screenshots" class="btn btn-secondary">
+                            <i class="fas fa-images"></i> View Screenshots
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image" data-aos="fade-left">
+                    <img src="images/screenshots/Welcome_page.png" alt="Meal Monkey Welcome Screen" class="hero-mockup" />
+                </div>
+            </div>
+        </div>
+        <div class="hero-wave">
+            <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#ffffff" d="M0,64L80,69.3C160,75,320,85,480,80C640,75,800,53,960,48C1120,43,1280,53,1360,58.7L1440,64L1440,120L1360,120C1280,120,1120,120,960,120C800,120,640,120,480,120C320,120,160,120,80,120L0,120Z"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Powerful Features</h2>
+                <p>Everything you need in a modern food delivery platform</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Secure Authentication</h3>
+                    <p>JWT-based auth with email, phone OTP, and Google Sign-In integration for maximum security</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Location Services</h3>
+                    <p>Real-time location tracking with Google Maps integration for accurate deliveries</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3>Payment Integration</h3>
+                    <p>Razorpay payment gateway for secure and seamless transactions</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon">
+                        <i class="fas fa-bell"></i>
+                    </div>
+                    <h3>Push Notifications</h3>
+                    <p>Firebase Cloud Messaging for real-time order updates and notifications</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>Smart Cart System</h3>
+                    <p>Persistent cart with GetX state management and backend synchronization</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="600">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>Rating & Reviews</h3>
+                    <p>Customer feedback system for restaurants and delivery partners</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apps Showcase -->
+    <section class="apps" id="apps">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Three Powerful Apps</h2>
+                <p>Complete ecosystem for customers, delivery partners, and restaurants</p>
+            </div>
+            <div class="apps-grid">
+                <!-- Customer App -->
+                <div class="app-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="app-icon customer-app">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3>Customer App</h3>
+                    <p>Browse restaurants, order food, track deliveries, and manage your profile</p>
+                    <ul class="app-features">
+                        <li><i class="fas fa-check"></i> Restaurant browsing</li>
+                        <li><i class="fas fa-check"></i> Menu exploration</li>
+                        <li><i class="fas fa-check"></i> Cart management</li>
+                        <li><i class="fas fa-check"></i> Order tracking</li>
+                        <li><i class="fas fa-check"></i> Payment processing</li>
+                        <li><i class="fas fa-check"></i> Ratings & reviews</li>
+                    </ul>
+                    <div class="app-mockup">
+                        <img src="images/screenshots/MealMonkeyHomeScreen.png" alt="Customer App Home Screen" />
+                    </div>
+                </div>
+
+                <!-- Delivery Partner App -->
+                <div class="app-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="app-icon delivery-app">
+                        <i class="fas fa-motorcycle"></i>
+                    </div>
+                    <h3>Delivery Partner App</h3>
+                    <p>Accept orders, navigate routes, and manage deliveries efficiently</p>
+                    <ul class="app-features">
+                        <li><i class="fas fa-check"></i> Order acceptance</li>
+                        <li><i class="fas fa-check"></i> Route optimization</li>
+                        <li><i class="fas fa-check"></i> Real-time tracking</li>
+                        <li><i class="fas fa-check"></i> Earnings dashboard</li>
+                        <li><i class="fas fa-check"></i> Delivery history</li>
+                        <li><i class="fas fa-check"></i> Navigation support</li>
+                    </ul>
+                    <div class="app-mockup">
+                        <img src="images/screenshots/DeliveryPartnerHomePage.png" alt="Delivery Partner App Home" />
+                    </div>
+                </div>
+
+                <!-- Restaurant App -->
+                <div class="app-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="app-icon restaurant-app">
+                        <i class="fas fa-store"></i>
+                    </div>
+                    <h3>Restaurant App</h3>
+                    <p>Manage menu, process orders, and track restaurant performance</p>
+                    <ul class="app-features">
+                        <li><i class="fas fa-check"></i> Menu management</li>
+                        <li><i class="fas fa-check"></i> Order processing</li>
+                        <li><i class="fas fa-check"></i> Inventory tracking</li>
+                        <li><i class="fas fa-check"></i> Analytics dashboard</li>
+                        <li><i class="fas fa-check"></i> Customer feedback</li>
+                        <li><i class="fas fa-check"></i> Staff management</li>
+                    </ul>
+                    <div class="app-mockup">
+                        <img src="images/screenshots/HomeScreenRestaurent.png" alt="Restaurant App Home Screen" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="tech-stack" id="tech">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Modern Tech Stack</h2>
+                <p>Built with industry-leading technologies</p>
+            </div>
+            <div class="tech-grid">
+                <div class="tech-category" data-aos="fade-up" data-aos-delay="100">
+                    <h3><i class="fas fa-mobile-alt"></i> Frontend</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <i class="fab fa-flutter" style="color: #02569B;"></i>
+                            <span>Flutter</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-bolt" style="color: #8E44AD;"></i>
+                            <span>GetX</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-database" style="color: #E67E22;"></i>
+                            <span>GetStorage</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-fire" style="color: #F39C12;"></i>
+                            <span>Firebase</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-category" data-aos="fade-up" data-aos-delay="200">
+                    <h3><i class="fas fa-server"></i> Backend</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <i class="fab fa-node-js" style="color: #68A063;"></i>
+                            <span>Node.js</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-route" style="color: #000000;"></i>
+                            <span>Express.js</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-leaf" style="color: #4DB33D;"></i>
+                            <span>MongoDB</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-shield-alt" style="color: #E74C3C;"></i>
+                            <span>JWT Auth</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tech-category" data-aos="fade-up" data-aos-delay="300">
+                    <h3><i class="fas fa-plug"></i> Integrations</h3>
+                    <div class="tech-items">
+                        <div class="tech-item">
+                            <i class="fab fa-google" style="color: #4285F4;"></i>
+                            <span>Google Maps</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-credit-card" style="color: #3498DB;"></i>
+                            <span>Razorpay</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-fire" style="color: #FFCA28;"></i>
+                            <span>FCM</span>
+                        </div>
+                        <div class="tech-item">
+                            <i class="fas fa-cloud" style="color: #3498DB;"></i>
+                            <span>Cloudinary</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Screenshots Section -->
+    <section class="screenshots" id="screenshots">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>App Screenshots</h2>
+                <p>Take a look at the beautiful user interface</p>
+            </div>
+            <div class="screenshots-slider" data-aos="fade-up">
+                <div class="slider-container">
+                    <!-- Customer App Screenshots -->
+                     <div class="screenshot-item">
+                        <img src="images/screenshots/Welcome_page.png" alt="Welcome Page" />
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/screenshots/Onboarding_page_1.png" alt="Onboarding Page 1" />
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/screenshots/OnboardingPage2.png" alt="Onboarding Page 2" />
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/screenshots/OnboardingPage3.png" alt="Onboarding Page 3" />
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/screenshots/Login_page.png" alt="Login Page" />
+                    </div>
+                    
+                    <div class="screenshot-item">
+                        <img src="images/screenshots/MealMonkeyHomeScreen.png" alt="Meal Monkey Home Screen" />
+                    </div>
+                    
+                    <div class="screenshot-item">
+                        <img src="images/screenshots/MenuPage.png" alt="Menu Page" />
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/screenshots/OffersPage.png" alt="Offers Page" />
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/screenshots/CartPage.png" alt="Cart Page" />
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/screenshots/ProfilePage.png" alt="Profile Page" />
+                    </div>
+
+                    <div class="screenshot-item">
+                        <img src="images/screenshots/FoodDetailsPage.png" alt="Food Details" />
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/screenshots/RestaurentDetailsPage.png" alt="Restaurant Details" />
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/screenshots/OrderPage.png" alt="Order Page" />
+                    </div>
+                    
+                    <div class="screenshot-item">
+                        <img src="images/screenshots/PaymentPage.png" alt="Payment Page" />
+                    </div>
+                    
+                    <div class="screenshot-item">
+                        <img src="images/screenshots/TrackingOrderPage.png" alt="Order Tracking" />
+                    </div>
+                    
+                    
+                    
+                    <!-- Delivery Partner App Screenshots -->
+                    <div class="screenshot-item">
+                        <img src="images/screenshots/DeliveryPartnerWelcomePage.png" alt="Delivery Partner Welcome" />
+                    </div>
+                    <div class="screenshot-item">
+                        <img src="images/screenshots/DeliveryPartnerHomePage.png" alt="Delivery Partner Home" />
+                    </div>
+                    
+                    <!-- Restaurant App Screenshots -->
+
+                    <div class="screenshot-item">
+                        <img src="images/screenshots/HomeScreenRestaurent.png" alt="Restaurant Home Screen" />
+                    </div>
+                    
+                    <div class="screenshot-item">
+                        <img src="images/screenshots/AddNewFoodItemPage.png" alt="Add New Food Item" />
+                    </div>
+                </div>
+                <button class="slider-btn prev" onclick="moveSlider(-1)">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="slider-btn next" onclick="moveSlider(1)">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Section -->
+    <section class="architecture">
+        <div class="container">
+            <div class="section-header" data-aos="fade-up">
+                <h2>System Architecture</h2>
+                <p>Clean, scalable, and maintainable code structure</p>
+            </div>
+            <div class="architecture-content">
+                <div class="architecture-diagram" data-aos="fade-right">
+                    <!-- CLICKABLE ARCHITECTURE DIAGRAM -->
+                    <a href="architecture.html" class="diagram-placeholder architecture-link">
+                        <i class="fas fa-project-diagram"></i>
+                        <p>View System Architecture</p>
+                        <small>Click to explore the complete architecture</small>
+                        <div class="arrow-icon">
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                    </a>
+                </div>
+                <div class="architecture-features" data-aos="fade-left">
+                    <div class="arch-feature">
+                        <i class="fas fa-layer-group"></i>
+                        <div>
+                            <h4>MVVM Architecture</h4>
+                            <p>Separation of concerns with Model-View-ViewModel pattern</p>
+                        </div>
+                    </div>
+                    <div class="arch-feature">
+                        <i class="fas fa-sync-alt"></i>
+                        <div>
+                            <h4>RESTful API</h4>
+                            <p>Well-structured API endpoints with proper HTTP methods</p>
+                        </div>
+                    </div>
+                    <div class="arch-feature">
+                        <i class="fas fa-database"></i>
+                        <div>
+                            <h4>MongoDB Schema</h4>
+                            <p>Optimized database schemas with proper indexing</p>
+                        </div>
+                    </div>
+                    <div class="arch-feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <div>
+                            <h4>Middleware Security</h4>
+                            <p>JWT verification and role-based access control</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GitHub CTA Section -->
+    <section class="github-cta">
+        <div class="container">
+            <div class="cta-content" data-aos="zoom-in">
+                <i class="fab fa-github"></i>
+                <h2>Open Source on GitHub</h2>
+                <p>Explore the code, contribute, and learn from this complete food delivery ecosystem</p>
+                <div class="github-stats">
+                    <div class="stat">
+                        <i class="fas fa-code-branch"></i>
+                        <span>Full Stack</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-mobile-alt"></i>
+                        <span>3 Apps</span>
+                    </div>
+                    <div class="stat">
+                        <i class="fas fa-file-code"></i>
+                        <span>Well Documented</span>
+                    </div>
+                </div>
+                <a href="https://github.com/yashnandwanii/Meal-Monkey" target="_blank" class="btn btn-github-large">
+                    <i class="fab fa-github"></i> View Repository
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-utensils"></i>
+                        <span>Meal Monkey</span>
+                    </div>
+                    <p>Complete food delivery ecosystem built with Flutter & Node.js</p>
+                    <div class="social-links">
+                        <a href="https://github.com/yashnandwanii" target="_blank" aria-label="GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Technology</h4>
+                    <ul>
+                        <li>Flutter</li>
+                        <li>Node.js</li>
+                        <li>MongoDB</li>
+                        <li>Firebase</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>Customer App</li>
+                        <li>Delivery Partner App</li>
+                        <li>Restaurant App</li>
+                        <li>Real-time Tracking</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://github.com/yashnandwanii/Meal-Monkey" target="_blank">GitHub</a></li>
+                        <li><a href="https://github.com/yashnandwanii/Meal-Monkey#readme" target="_blank">Documentation</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Meal Monkey. Built by <a href="https://github.com/yashnandwanii" target="_blank">Yash Nandwani</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS Library for animations -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+</body>
+</html>

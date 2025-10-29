@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Monkey - System Architecture</title>
+    
+    <!-- Mermaid JS -->
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#FF6B35',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#FC4A1A',
+                lineColor: '#F7931E',
+                secondaryColor: '#4ECDC4',
+                tertiaryColor: '#FFE66D',
+                fontSize: '16px'
+            }
+        });
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            color: #FF6B35;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #FF6B35 0%, #FC4A1A 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .nav-btn.secondary {
+            background: linear-gradient(135deg, #4ECDC4 0%, #44A08D 100%);
+        }
+
+        .diagram-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 3px solid #e9ecef;
+            overflow-x: auto;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            min-height: 600px;
+        }
+
+        .info-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-card.frontend {
+            border-color: #4ECDC4;
+        }
+
+        .info-card.backend {
+            border-color: #FF6B35;
+        }
+
+        .info-card.database {
+            border-color: #805AD5;
+        }
+
+        .info-card.external {
+            border-color: #FFE66D;
+        }
+
+        .info-card h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .info-card li {
+            padding: 8px 0;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .info-card li:before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            border: 2px solid #333;
+        }
+
+        .legend-label {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #e9ecef;
+            color: #666;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .feature-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-box:hover {
+            transform: scale(1.05);
+        }
+
+        .feature-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .feature-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .feature-desc {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .subtitle {
+                font-size: 1em;
+            }
+
+            .diagram-container {
+                padding: 15px;
+            }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🍕 Meal Monkey System Architecture</h1>
+            <p class="subtitle">Complete Food Delivery Ecosystem - Visual Overview</p>
+            
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-btn">← Back to Landing Page</a>
+                <a href="../PROJECT_FLOWCHART.md" class="nav-btn secondary">View Full Documentation</a>
+            </div>
+        </div>
+
+        <div class="diagram-container">
+            <div class="loading">Loading architecture diagram...</div>
+            <div class="mermaid">
+%%{init: {'theme':'base', 'themeVariables': { 'primaryColor':'#FF6B35','primaryTextColor':'#fff','primaryBorderColor':'#FC4A1A','lineColor':'#F7931E','secondaryColor':'#4ECDC4','tertiaryColor':'#FFE66D','fontSize':'16px'}}}%%
+graph TB
+    subgraph Frontend["🎨 Frontend Applications"]
+        CA["📱 Customer App<br/><b>Flutter</b><br/>━━━━━━━━━━<br/>iOS & Android"]
+        DA["🚚 Delivery Partner App<br/><b>Flutter</b><br/>━━━━━━━━━━<br/>Real-time Tracking"]
+        RA["🍽️ Restaurant App<br/><b>Flutter</b><br/>━━━━━━━━━━<br/>Order Management"]
+        LP["🌐 Landing Page<br/><b>HTML/CSS/JS</b><br/>━━━━━━━━━━<br/>Marketing Site"]
+    end
+    
+    subgraph Backend["⚙️ Backend Services"]
+        MB["🔷 Main Backend<br/><b>Node.js + Express</b><br/>━━━━━━━━━━<br/>Port: 3000<br/>Orders, Auth, Payments"]
+        DB["🔷 Delivery Backend<br/><b>Node.js + Socket.IO</b><br/>━━━━━━━━━━<br/>Port: 6014<br/>Live Tracking"]
+        RB["🔷 Restaurant Backend<br/><b>Node.js + Express</b><br/>━━━━━━━━━━<br/>Port: 3001<br/>Menu & Orders"]
+    end
+    
+    subgraph Database["💾 Database Layer"]
+        MONGO[("🍃 MongoDB Atlas<br/>━━━━━━━━━━<br/>Cloud Database<br/>Users, Orders, Restaurants")]
+    end
+    
+    subgraph External["🔌 External Services"]
+        FB["🔥 Firebase<br/>━━━━━━━━━━<br/>Authentication<br/>Push Notifications<br/>FCM"]
+        RP["💳 Razorpay<br/>━━━━━━━━━━<br/>Payment Gateway<br/>UPI, Cards, Wallets"]
+        GM["🗺️ Google Maps<br/>━━━━━━━━━━<br/>Location Services<br/>Navigation & Geocoding"]
+        CL["☁️ Cloudinary<br/>━━━━━━━━━━<br/>Media Storage<br/>Image CDN"]
+    end
+    
+    CA -.->|"🔐 REST API<br/>JSON"| MB
+    DA -.->|"🔐 REST API<br/>JSON"| DB
+    DA ==>|"⚡ WebSocket<br/>Real-time"| DB
+    RA -.->|"🔐 REST API<br/>JSON"| RB
+    
+    MB -->|"CRUD Operations"| MONGO
+    DB -->|"Location Updates"| MONGO
+    RB -->|"Menu Management"| MONGO
+    
+    CA -->|"OAuth 2.0<br/>FCM Token"| FB
+    DA -->|"OAuth 2.0<br/>FCM Token"| FB
+    RA -->|"OAuth 2.0<br/>FCM Token"| FB
+    
+    CA -->|"Payment<br/>Integration"| RP
+    CA -->|"Geolocation<br/>Geocoding"| GM
+    DA -->|"Navigation<br/>Live Location"| GM
+    
+    RB -->|"Image Upload<br/>CDN"| CL
+    
+    classDef frontendStyle fill:#4ECDC4,stroke:#2C7A7B,stroke-width:3px,color:#fff,font-weight:bold
+    classDef backendStyle fill:#FF6B35,stroke:#C53030,stroke-width:3px,color:#fff,font-weight:bold
+    classDef databaseStyle fill:#805AD5,stroke:#553C9A,stroke-width:4px,color:#fff,font-weight:bold
+    classDef externalStyle fill:#FFE66D,stroke:#D69E2E,stroke-width:3px,color:#2D3748,font-weight:bold
+    classDef subgraphStyle fill:#F7FAFC,stroke:#4A5568,stroke-width:2px
+    
+    class CA,DA,RA,LP frontendStyle
+    class MB,DB,RB backendStyle
+    class MONGO databaseStyle
+    class FB,RP,GM,CL externalStyle
+            </div>
+        </div>
+
+        <!-- Component Details -->
+        <div class="info-section">
+            <div class="info-card frontend">
+                <h3>🎨 Frontend Applications</h3>
+                <ul>
+                    <li>Customer App - Browse & Order Food</li>
+                    <li>Delivery Partner App - Accept & Deliver Orders</li>
+                    <li>Restaurant App - Manage Menu & Orders</li>
+                    <li>Landing Page - Marketing & Information</li>
+                    <li>Built with Flutter for iOS & Android</li>
+                </ul>
+            </div>
+
+            <div class="info-card backend">
+                <h3>⚙️ Backend Services</h3>
+                <ul>
+                    <li>Main Backend (Port 3000) - Orders, Auth, Payments</li>
+                    <li>Delivery Backend (Port 6014) - Live Tracking</li>
+                    <li>Restaurant Backend (Port 3001) - Menu Management</li>
+                    <li>Node.js + Express.js Framework</li>
+                    <li>Real-time Communication via Socket.IO</li>
+                </ul>
+            </div>
+
+            <div class="info-card database">
+                <h3>💾 Database Layer</h3>
+                <ul>
+                    <li>MongoDB Atlas - Cloud Database</li>
+                    <li>Stores Users, Orders, Restaurants</li>
+                    <li>Real-time Location Data</li>
+                    <li>Mongoose ODM for Schema Management</li>
+                    <li>Scalable & High Performance</li>
+                </ul>
+            </div>
+
+            <div class="info-card external">
+                <h3>🔌 External Services</h3>
+                <ul>
+                    <li>Firebase - Auth & Push Notifications</li>
+                    <li>Razorpay - Payment Gateway (UPI, Cards)</li>
+                    <li>Google Maps - Location & Navigation</li>
+                    <li>Cloudinary - Media Storage & CDN</li>
+                    <li>Email Service - OTP & Notifications</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div style="margin-top: 50px;">
+            <h2 style="text-align: center; color: #333; margin-bottom: 30px;">🎯 Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-box">
+                    <div class="feature-icon">🔐</div>
+                    <div class="feature-title">Secure Authentication</div>
+                    <div class="feature-desc">JWT tokens, OAuth 2.0, and OTP verification</div>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">Real-time Tracking</div>
+                    <div class="feature-desc">WebSocket for live order and location updates</div>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">💳</div>
+                    <div class="feature-title">Multiple Payments</div>
+                    <div class="feature-desc">Razorpay, UPI, Cards, Wallets, Cash on Delivery</div>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">🗺️</div>
+                    <div class="feature-title">GPS Navigation</div>
+                    <div class="feature-desc">Google Maps integration for routing</div>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">🔔</div>
+                    <div class="feature-title">Push Notifications</div>
+                    <div class="feature-desc">Firebase FCM for instant updates</div>
+                </div>
+
+                <div class="feature-box">
+                    <div class="feature-icon">☁️</div>
+                    <div class="feature-title">Cloud Storage</div>
+                    <div class="feature-desc">Cloudinary CDN for fast image delivery</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background: #4ECDC4;"></div>
+                <span class="legend-label">Frontend Apps</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #FF6B35;"></div>
+                <span class="legend-label">Backend Services</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #805AD5;"></div>
+                <span class="legend-label">Database</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #FFE66D;"></div>
+                <span class="legend-label">External Services</span>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>Meal Monkey Food Delivery Ecosystem</strong></p>
+            <p>Created: October 29, 2025 | Author: Yash Nandwani</p>
+            <p style="margin-top: 10px;">Complete end-to-end food delivery platform with real-time tracking</p>
+        </div>
+    </div>
+
+    <script>
+        // Hide loading message once Mermaid renders
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                const loading = document.querySelector('.loading');
+                if (loading) {
+                    loading.style.display = 'none';
+                }
+            }, 1000);
+        });
+
+        // Add smooth animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.info-card, .feature-box');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+        });
+    </script>
+</body>
+</html>
